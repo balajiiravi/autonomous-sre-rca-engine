@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ragex/
+
+# Secrets
+.env
+*.pem
+*.key
+
+# Generated telemetry
+*.log
+
+# Local databases
+*.db
+*.sqlite
+
+# IDE and OS
+.idea/
+.vscode/
+.DS_Store

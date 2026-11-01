@@ -1,0 +1,50 @@
+[2026-10-31 16:08:00] [inventory-db] [INFO] Connection pool active: 4/50 allocations used. Ledger read/write queries successfully committed.
+[2026-10-31 16:09:15] [payment-service] [INFO] Token authorized for transaction payload. Validating ledger records...
+[2026-10-31 16:09:16] [payment-service] [ERROR] Upstream timeout on database commit validation loop. Execution halted after 1500ms.
+[2026-10-31 16:09:40] [frontend-service] [INFO] HTTP GET /checkout initiated by user browser session context.
+[2026-10-31 16:09:42] [frontend-service] [ERROR] HTTP POST /checkout failed - Status 504 Gateway Timeout from backend service.
+[2026-10-31 16:09:53] [inventory-db] [INFO] Connection pool active: 4/50 allocations used. Ledger read/write queries successfully committed.
+[2026-10-31 16:11:52] [payment-service] [INFO] Token authorized for transaction payload. Validating ledger records...
+[2026-10-31 16:11:54] [payment-service] [ERROR] Upstream timeout on database commit validation loop. Execution halted after 1500ms.
+[2026-11-01 17:31:46] [uvicorn.error] [INFO] [request_id=system] Started server process [20958]
+[2026-11-01 17:31:46] [uvicorn.error] [INFO] [request_id=system] Waiting for application startup.
+[2026-11-01 17:31:46] [uvicorn.error] [INFO] [request_id=system] Application startup complete.
+[2026-11-01 17:31:46] [uvicorn.error] [INFO] [request_id=system] Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+[2026-11-01 17:32:00] [frontend-service] [INFO] [request_id=104d6c9c-0179-4862-afce-703e2db338d5] Checkout request received from browser.
+[2026-11-01 17:32:00] [payment-service] [INFO] [request_id=104d6c9c-0179-4862-afce-703e2db338d5] Payment initiated. Validating inventory availability.
+[2026-11-01 17:32:00] [inventory-db] [INFO] [request_id=104d6c9c-0179-4862-afce-703e2db338d5] Connection pool healthy: 4/50 sessions occupied.
+[2026-11-01 17:32:00] [uvicorn.access] [INFO] [request_id=system] 127.0.0.1:58950 - "GET /query-inventory HTTP/1.1" 200
+[2026-11-01 17:32:00] [httpx] [INFO] [request_id=104d6c9c-0179-4862-afce-703e2db338d5] HTTP Request: GET http://127.0.0.1:8000/query-inventory "HTTP/1.1 200 OK"
+[2026-11-01 17:32:00] [payment-service] [INFO] [request_id=104d6c9c-0179-4862-afce-703e2db338d5] Inventory validation successful. Payment settled.
+[2026-11-01 17:32:00] [uvicorn.access] [INFO] [request_id=system] 127.0.0.1:58949 - "GET /process-payment HTTP/1.1" 200
+[2026-11-01 17:32:00] [httpx] [INFO] [request_id=104d6c9c-0179-4862-afce-703e2db338d5] HTTP Request: GET http://127.0.0.1:8000/process-payment "HTTP/1.1 200 OK"
+[2026-11-01 17:32:00] [frontend-service] [INFO] [request_id=104d6c9c-0179-4862-afce-703e2db338d5] Checkout completed successfully.
+[2026-11-01 17:32:00] [uvicorn.access] [INFO] [request_id=system] 127.0.0.1:58947 - "GET /checkout HTTP/1.1" 200
+[2026-11-01 17:33:04] [inventory-db] [INFO] [request_id=b87bbc5d-8247-42b4-a89f-764352cc1565] CHAOS RESET: Database restored to healthy state.
+[2026-11-01 17:33:04] [uvicorn.access] [INFO] [request_id=system] 127.0.0.1:58952 - "GET /reset-system HTTP/1.1" 200
+[2026-11-01 17:33:04] [frontend-service] [INFO] [request_id=117f7be2-2975-4426-940f-c1652c0fb315] Checkout request received from browser.
+[2026-11-01 17:33:04] [payment-service] [INFO] [request_id=117f7be2-2975-4426-940f-c1652c0fb315] Payment initiated. Validating inventory availability.
+[2026-11-01 17:33:04] [inventory-db] [INFO] [request_id=117f7be2-2975-4426-940f-c1652c0fb315] Connection pool healthy: 4/50 sessions occupied.
+[2026-11-01 17:33:04] [uvicorn.access] [INFO] [request_id=system] 127.0.0.1:58955 - "GET /query-inventory HTTP/1.1" 200
+[2026-11-01 17:33:04] [httpx] [INFO] [request_id=117f7be2-2975-4426-940f-c1652c0fb315] HTTP Request: GET http://127.0.0.1:8000/query-inventory "HTTP/1.1 200 OK"
+[2026-11-01 17:33:04] [payment-service] [INFO] [request_id=117f7be2-2975-4426-940f-c1652c0fb315] Inventory validation successful. Payment settled.
+[2026-11-01 17:33:04] [uvicorn.access] [INFO] [request_id=system] 127.0.0.1:58954 - "GET /process-payment HTTP/1.1" 200
+[2026-11-01 17:33:04] [httpx] [INFO] [request_id=117f7be2-2975-4426-940f-c1652c0fb315] HTTP Request: GET http://127.0.0.1:8000/process-payment "HTTP/1.1 200 OK"
+[2026-11-01 17:33:04] [frontend-service] [INFO] [request_id=117f7be2-2975-4426-940f-c1652c0fb315] Checkout completed successfully.
+[2026-11-01 17:33:04] [uvicorn.access] [INFO] [request_id=system] 127.0.0.1:58953 - "GET /checkout HTTP/1.1" 200
+[2026-11-01 17:33:04] [inventory-db] [WARNING] [request_id=f38f1db1-0c60-47ee-a8a9-1d903bd0474b] CHAOS INJECTION: Database connection pool exhaustion activated.
+[2026-11-01 17:33:04] [uvicorn.access] [INFO] [request_id=system] 127.0.0.1:58956 - "GET /simulate-chaos HTTP/1.1" 200
+[2026-11-01 17:33:04] [frontend-service] [INFO] [request_id=8b5a0b18-dda4-4434-af21-da245ceee59d] Checkout request received from browser.
+[2026-11-01 17:33:04] [payment-service] [INFO] [request_id=8b5a0b18-dda4-4434-af21-da245ceee59d] Payment initiated. Validating inventory availability.
+[2026-11-01 17:33:04] [inventory-db] [CRITICAL] [request_id=8b5a0b18-dda4-4434-af21-da245ceee59d] CONNECTION POOL EXHAUSTED: 50/50 sessions occupied. New requests blocked waiting for connections.
+[2026-11-01 17:33:04] [uvicorn.access] [INFO] [request_id=system] 127.0.0.1:58959 - "GET /query-inventory HTTP/1.1" 500
+[2026-11-01 17:33:04] [httpx] [INFO] [request_id=8b5a0b18-dda4-4434-af21-da245ceee59d] HTTP Request: GET http://127.0.0.1:8000/query-inventory "HTTP/1.1 500 Internal Server Error"
+[2026-11-01 17:33:04] [payment-service] [ERROR] [request_id=8b5a0b18-dda4-4434-af21-da245ceee59d] Inventory dependency failed with HTTP 500.
+[2026-11-01 17:33:04] [uvicorn.access] [INFO] [request_id=system] 127.0.0.1:58958 - "GET /process-payment HTTP/1.1" 500
+[2026-11-01 17:33:04] [httpx] [INFO] [request_id=8b5a0b18-dda4-4434-af21-da245ceee59d] HTTP Request: GET http://127.0.0.1:8000/process-payment "HTTP/1.1 500 Internal Server Error"
+[2026-11-01 17:33:04] [frontend-service] [ERROR] [request_id=8b5a0b18-dda4-4434-af21-da245ceee59d] HTTP 504: Payment dependency returned status 500.
+[2026-11-01 17:33:04] [uvicorn.access] [INFO] [request_id=system] 127.0.0.1:58957 - "GET /checkout HTTP/1.1" 504
+[2026-11-01 17:44:17] [uvicorn.error] [INFO] [request_id=system] Shutting down
+[2026-11-01 17:44:17] [uvicorn.error] [INFO] [request_id=system] Waiting for application shutdown.
+[2026-11-01 17:44:17] [uvicorn.error] [INFO] [request_id=system] Application shutdown complete.
+[2026-11-01 17:44:17] [uvicorn.error] [INFO] [request_id=system] Finished server process [20958]

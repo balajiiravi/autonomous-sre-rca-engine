@@ -1,0 +1,174 @@
+{
+    "incident_id": "INC-63D4D7DC433A",
+    "started_at": "2026-11-01T17:33:04",
+    "ended_at": "2026-11-01T17:33:04",
+    "alerting_service": "frontend-service",
+    "severity": "CRITICAL",
+    "request_ids": [
+        "8b5a0b18-dda4-4434-af21-da245ceee59d"
+    ],
+    "events": [
+        {
+            "event_id": "17a9ea7a3f654753",
+            "timestamp": "2026-11-01T17:33:04",
+            "service": "frontend-service",
+            "severity": "INFO",
+            "request_id": "8b5a0b18-dda4-4434-af21-da245ceee59d",
+            "message": "Checkout request received from browser.",
+            "sequence": 37,
+            "event_type": "GENERAL",
+            "resource": {
+                "resource_type": null,
+                "used": null,
+                "capacity": null
+            },
+            "source": "application_log"
+        },
+        {
+            "event_id": "d66f31c7383c1773",
+            "timestamp": "2026-11-01T17:33:04",
+            "service": "payment-service",
+            "severity": "INFO",
+            "request_id": "8b5a0b18-dda4-4434-af21-da245ceee59d",
+            "message": "Payment initiated. Validating inventory availability.",
+            "sequence": 38,
+            "event_type": "GENERAL",
+            "resource": {
+                "resource_type": null,
+                "used": null,
+                "capacity": null
+            },
+            "source": "application_log"
+        },
+        {
+            "event_id": "f815bc4b1dbcdc98",
+            "timestamp": "2026-11-01T17:33:04",
+            "service": "inventory-db",
+            "severity": "CRITICAL",
+            "request_id": "8b5a0b18-dda4-4434-af21-da245ceee59d",
+            "message": "CONNECTION POOL EXHAUSTED: 50/50 sessions occupied. New requests blocked waiting for connections.",
+            "sequence": 39,
+            "event_type": "RESOURCE_EXHAUSTION",
+            "resource": {
+                "resource_type": "DATABASE_CONNECTION_POOL",
+                "used": 50,
+                "capacity": 50
+            },
+            "source": "application_log"
+        },
+        {
+            "event_id": "7fcfb9f932528d23",
+            "timestamp": "2026-11-01T17:33:04",
+            "service": "httpx",
+            "severity": "INFO",
+            "request_id": "8b5a0b18-dda4-4434-af21-da245ceee59d",
+            "message": "HTTP Request: GET http://127.0.0.1:8000/query-inventory \"HTTP/1.1 500 Internal Server Error\"",
+            "sequence": 41,
+            "event_type": "GENERAL",
+            "resource": {
+                "resource_type": null,
+                "used": null,
+                "capacity": null
+            },
+            "source": "application_log"
+        },
+        {
+            "event_id": "482dd4db5d1442b6",
+            "timestamp": "2026-11-01T17:33:04",
+            "service": "payment-service",
+            "severity": "ERROR",
+            "request_id": "8b5a0b18-dda4-4434-af21-da245ceee59d",
+            "message": "Inventory dependency failed with HTTP 500.",
+            "sequence": 42,
+            "event_type": "DEPENDENCY_FAILURE",
+            "resource": {
+                "resource_type": null,
+                "used": null,
+                "capacity": null
+            },
+            "source": "application_log"
+        },
+        {
+            "event_id": "91f4a1fb48faee28",
+            "timestamp": "2026-11-01T17:33:04",
+            "service": "httpx",
+            "severity": "INFO",
+            "request_id": "8b5a0b18-dda4-4434-af21-da245ceee59d",
+            "message": "HTTP Request: GET http://127.0.0.1:8000/process-payment \"HTTP/1.1 500 Internal Server Error\"",
+            "sequence": 44,
+            "event_type": "GENERAL",
+            "resource": {
+                "resource_type": null,
+                "used": null,
+                "capacity": null
+            },
+            "source": "application_log"
+        },
+        {
+            "event_id": "4b5c6c43519374f5",
+            "timestamp": "2026-11-01T17:33:04",
+            "service": "frontend-service",
+            "severity": "ERROR",
+            "request_id": "8b5a0b18-dda4-4434-af21-da245ceee59d",
+            "message": "HTTP 504: Payment dependency returned status 500.",
+            "sequence": 45,
+            "event_type": "DEPENDENCY_FAILURE",
+            "resource": {
+                "resource_type": null,
+                "used": null,
+                "capacity": null
+            },
+            "source": "application_log"
+        }
+    ],
+    "root_cause_candidate": "inventory-db",
+    "propagation_tree": {
+        "service": "inventory-db",
+        "event_ids": [
+            "f815bc4b1dbcdc98"
+        ],
+        "failure_type": "RESOURCE_EXHAUSTION",
+        "severity": "CRITICAL",
+        "evidence": [
+            "CONNECTION POOL EXHAUSTED: 50/50 sessions occupied. New requests blocked waiting for connections."
+        ],
+        "children": [
+            {
+                "service": "payment-service",
+                "event_ids": [
+                    "d66f31c7383c1773",
+                    "482dd4db5d1442b6"
+                ],
+                "failure_type": "DEPENDENCY_FAILURE",
+                "severity": "ERROR",
+                "evidence": [
+                    "Payment initiated. Validating inventory availability.",
+                    "Inventory dependency failed with HTTP 500."
+                ],
+                "children": [
+                    {
+                        "service": "frontend-service",
+                        "event_ids": [
+                            "17a9ea7a3f654753",
+                            "4b5c6c43519374f5"
+                        ],
+                        "failure_type": "DEPENDENCY_FAILURE",
+                        "severity": "ERROR",
+                        "evidence": [
+                            "Checkout request received from browser.",
+                            "HTTP 504: Payment dependency returned status 500."
+                        ],
+                        "children": []
+                    }
+                ]
+            }
+        ]
+    },
+    "correlation_method": "request_id",
+    "confidence": 0.85,
+    "metadata": {
+        "candidate_method": "furthest_reachable_failing_dependency",
+        "is_confirmed_root_cause": false,
+        "heuristic_confidence": true
+    }
+}
